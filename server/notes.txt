@@ -1,1 +1,3 @@
 npx tsconfig.json # to initialize TypeScript config
+
+npx mikro-orm migration:create   # Create new migration with current schema diff
