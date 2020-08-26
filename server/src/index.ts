@@ -6,10 +6,11 @@ import { ApolloServer } from "apollo-server-express";
 import { __prod__ } from "./constants";
 import mikroConfig from "./mikro-orm.config";
 import { HelloResolver } from "./resolvers/hello";
+import { PostResolver } from "./resolvers/post";
 // import { Post } from "./entities/Post";
 
 const main = async () => {
-  // const orm = await MikroORM.init(mikroConfig);
+  const orm = await MikroORM.init(mikroConfig);
   // await orm.getMigrator().up();
   await MikroORM.init(mikroConfig);
 
@@ -17,9 +18,10 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver],
+      resolvers: [HelloResolver, PostResolver],
       validate: false,
     }),
+    context: () => ({ em: orm.em }),
   });
 
   apolloServer.applyMiddleware({ app });
