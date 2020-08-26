@@ -1,0 +1,1 @@
+npx tsconfig.json # to initialize TypeScript config
