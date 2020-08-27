@@ -32,9 +32,9 @@
     "pg": "^8.3.2",
     "type-graphql": "^1.0.0"
   },
-  "mkiro-orm": {
+  "mikro-orm": {
     "useTsNode": true,
-    "configPath": [
+    "configPaths": [
       "./src/mikro-orm.config.ts",
       "./dist/mikro-orm.config.js"
     ]
