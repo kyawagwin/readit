@@ -1,3 +1,8 @@
 npx tsconfig.json # to initialize TypeScript config
 
 npx mikro-orm migration:create   # Create new migration with current schema diff
+
+install redis for session testing
+
+change GraphQL playground setting for session testing 
+  "request.credentials": "omit", change to "include"
