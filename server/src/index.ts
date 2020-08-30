@@ -21,6 +21,9 @@ const main = async () => {
 
   const app = express();
 
+  const RedisStore = connectRedis(session);
+  const redisClient = redis.createClient();
+
   app.use(
     cors({
       origin: "http://localhost:3000",
@@ -28,12 +31,10 @@ const main = async () => {
     })
   );
 
-  const RedisStore = connectRedis(session);
-  const redisClient = redis.createClient();
-
   app.use(
     session({
       name: "qid",
+
       store: new RedisStore({
         client: redisClient,
         disableTouch: true,
@@ -58,7 +59,7 @@ const main = async () => {
     context: ({ req, res }): MyContext => <MyContext>{ em: orm.em, req, res },
   });
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(4000, () => {
     console.log("server started on localhost:4000");
