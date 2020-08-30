@@ -5,26 +5,12 @@ import { useMutation } from "urql";
 
 import { Wrapper } from "../components/Wrapper";
 import { InputField } from "../components/InputField";
+import { useRegisterMutation } from "../generated/graphql";
 
 interface registerProps {}
 
-const REGISTER_MUT = `
-mutation Register($username: String!, $password:String!) {
-  register(options: { username: $username, password: $password }) {
-    errors {
-      field
-      message
-    }
-    user {
-      id
-      username
-    }
-  }
-}
-`;
-
 const Register: React.FC<registerProps> = ({}) => {
-  const [, register] = useMutation(REGISTER_MUT);
+  const [, register] = useRegisterMutation();
 
   return (
     <Wrapper variant="small">
@@ -32,6 +18,7 @@ const Register: React.FC<registerProps> = ({}) => {
         initialValues={{ username: "", password: "" }}
         onSubmit={async (values) => {
           const response = await register(values);
+          console.log(response.data.register.user.id);
         }}
       >
         {({ isSubmitting }) => (
