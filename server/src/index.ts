@@ -6,6 +6,7 @@ import { ApolloServer } from "apollo-server-express";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
+import cors from "cors";
 
 import { __prod__ } from "./constants";
 import mikroConfig from "./mikro-orm.config";
@@ -19,6 +20,13 @@ const main = async () => {
   await orm.getMigrator().up();
 
   const app = express();
+
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
 
   const RedisStore = connectRedis(session);
   const redisClient = redis.createClient();
