@@ -6,7 +6,7 @@ import { User } from "./entities/User";
 
 export default {
   user: "postgres",
-  password: "32592135",
+  password: "postgres",
   migrations: {
     path: path.join(__dirname, "./migrations"),
     pattern: /^[\w-]+\d+\.[tj]s$/,
