@@ -4,3 +4,5 @@ install redis for session testing
 
 change GraphQL playground setting for session testing 
   "request.credentials": "omit", change to "include"
+
+typeorm migration:create -n PostRefactoring # create migration script 
